@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>빛의 미로 — 레이저 탐험대 | 5학년 1학기 과학 2단원 빛의 성질</title>
+<meta name="description" content="2022 개정 과학 5-1-2 빛의 성질: 빛의 직진·반사·굴절과 거울·렌즈를 레이저 퍼즐로 배우는 바이브코딩 웹게임">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+</head>
+<body>
+
+<!-- ═══════════ 타이틀 ═══════════ -->
+<section class="screen active" data-screen="title">
+  <div class="title-bg"></div>
+  <div class="title-wrap">
+    <div class="title-logo">
+      <div class="logo-top">5학년 1학기 과학 · 2. 빛의 성질</div>
+      <h1><span class="l1">빛의</span> <span class="l2">미로</span></h1>
+      <div class="logo-sub">레이저 탐험대 LASER EXPLORERS</div>
+    </div>
+    <p class="title-desc">거울로 꺾고, 물로 휘고, 렌즈로 모아라!<br>빛의 <b>직진·반사·굴절</b>을 몸으로 익히는 레이저 퍼즐</p>
+    <div class="title-buttons">
+      <button id="btn-start" class="btn big primary">모험 시작 ▶</button>
+      <button id="btn-lab" class="btn big">🧪 가상 실험실</button>
+      <div class="row">
+        <button id="btn-quiz" class="btn">📝 입장 퀴즈</button>
+        <button id="btn-howto" class="btn">❓ 놀이 방법</button>
+        <button id="btn-teacher" class="btn ghost">🔑 선생님</button>
+      </div>
+    </div>
+    <div id="title-progress" class="title-progress"></div>
+    <div class="title-credit">성취기준 [6과02-01] [6과02-02] [6과02-03] · 명진초 최일훈 바이브코딩 · 2026</div>
+  </div>
+  <img class="title-lumi" src="assets/lumi.png" alt="">
+  <img class="title-bandi" src="assets/bandi.png" alt="">
+</section>
+
+<!-- ═══════════ 월드맵 ═══════════ -->
+<section class="screen" data-screen="map">
+  <header class="map-head">
+    <button id="btn-map-back" class="btn small">◀ 처음으로</button>
+    <h2>🗺️ 월드맵 <span id="map-stars" class="chip"></span></h2>
+    <button id="btn-concepts" class="btn small">📖 개념 도감</button>
+  </header>
+  <div id="worlds" class="worlds"></div>
+</section>
+
+<!-- ═══════════ 게임 ═══════════ -->
+<section class="screen" data-screen="game">
+  <header class="hud">
+    <div class="hud-left">
+      <button id="btn-to-map" class="btn small">◀ 맵</button>
+      <div class="hud-titles"><div id="hud-world" class="hud-world"></div><div id="hud-title" class="hud-title"></div></div>
+    </div>
+    <div id="hud-goal" class="hud-goal"></div>
+    <div class="hud-right">
+      <span id="hud-status" class="hud-status"></span>
+      <button id="btn-hint" class="btn small" title="힌트">💡 힌트</button>
+      <button id="btn-study" class="btn small" title="돋보기 모드(각도 표시)">🔬</button>
+      <button id="btn-reset" class="btn small" title="다시 시작 (R)">↺</button>
+      <button id="btn-sound" class="btn small" title="소리">🔊</button>
+      <button id="btn-fullscreen" class="btn small" title="전체 화면">⛶</button>
+    </div>
+  </header>
+  <main class="game-main">
+    <aside class="side">
+      <h3>🎒 부품 상자</h3>
+      <div id="inventory" class="inventory"></div>
+      <div class="side-help">끌어서 보드에 놓기 · 부품 클릭 후 <b>⟲ ⟳</b> 회전 (Q/E) · 보드 밖으로 끌면 되돌리기</div>
+      <div class="guide" id="guide">
+        <div class="bubble" id="guide-text">안녕! 나는 탐험대장 루미야. 빛을 크리스탈까지 보내 보자!</div>
+        <img class="guide-face" src="assets/lumi_face.png" alt="루미">
+      </div>
+    </aside>
+    <div class="board-wrap">
+      <canvas id="board" width="960" height="600"></canvas>
+      <div id="sel-bar" class="sel-bar">
+        <span id="sel-name"></span>
+        <button id="btn-rot-l" class="btn tiny rot" title="왼쪽 15° (Q)">⟲ 15°</button>
+        <button id="btn-rot-r" class="btn tiny rot" title="오른쪽 15° (E)">⟳ 15°</button>
+        <button id="btn-rot-fine-l" class="btn tiny fine" title="1° (←)">◀ 1°</button>
+        <button id="btn-rot-fine-r" class="btn tiny fine" title="1° (→)">1° ▶</button>
+        <button id="btn-remove" class="btn tiny danger" title="부품 상자로 되돌리기 (Delete)">🗑</button>
+      </div>
+      <div id="toast" class="toast"></div>
+    </div>
+  </main>
+</section>
+
+<!-- ═══════════ 모달 ═══════════ -->
+<div id="modal" class="modal">
+  <div class="modal-bg" data-close></div>
+  <div class="panel" data-panel="win">
+    <div class="win-stars" id="win-stars">⭐⭐⭐</div>
+    <h2 id="win-title">클리어!</h2>
+    <p id="win-sub" class="muted"></p>
+    <div id="win-concept"></div>
+    <div class="row center">
+      <button id="btn-win-retry" class="btn">↺ 다시</button>
+      <button id="btn-win-map" class="btn">🗺️ 월드맵</button>
+      <button id="btn-next" class="btn primary">다음 스테이지 ▶</button>
+    </div>
+  </div>
+  <div class="panel wide" data-panel="concepts">
+    <h2>📖 빛의 성질 개념 도감</h2>
+    <div id="concept-list" class="concept-list"></div>
+    <div class="row center"><button class="btn primary" data-close>닫기</button></div>
+  </div>
+  <div class="panel cert-panel" data-panel="cert">
+    <div class="cert" id="cert">
+      <div class="cert-top">🏅 LASER EXPLORERS · 빛의 미로 탐험대</div>
+      <h2 class="cert-title">탐 험 대 수 료 증</h2>
+      <div class="cert-name-row"><input id="cert-name" class="cert-name" placeholder="이름을 써요" maxlength="12"></div>
+      <p class="cert-body">위 탐험대원은 빛의 미로 15개 스테이지를 모두 통과하며<br><b>빛의 직진 · 반사 · 굴절</b>과 <b>거울 · 렌즈의 쓰임새</b>를 익혔기에<br>이 수료증을 드립니다.</p>
+      <div class="cert-stars" id="cert-stars"></div>
+      <div class="cert-foot"><span id="cert-date"></span><span>탐험대장 루미 · 빛의 요정 반디</span></div>
+      <img class="cert-lumi" src="assets/lumi.png" alt="">
+    </div>
+    <div class="row center no-print"><button class="btn" data-close>닫기</button><button class="btn primary" id="btn-cert-print">🖨️ 수료증 인쇄</button></div>
+  </div>
+  <div class="panel" data-panel="gate">
+    <div class="gate-icon">🔒</div>
+    <h2>입장퀴즈를 먼저 통과해요!</h2>
+    <p class="muted">탐험대원이 되려면 <b>10문제 중 7문제 이상</b> 맞혀야 해요.<br>통과하면 월드맵이 열려요. (🧪 가상 실험실은 바로 쓸 수 있어요)</p>
+    <div class="row center">
+      <button class="btn" data-close>닫기</button>
+      <button class="btn" id="btn-gate-teacher">🔑 선생님 코드</button>
+      <button class="btn primary" id="btn-gate-quiz">📝 입장퀴즈 풀기</button>
+    </div>
+  </div>
+  <div class="panel" data-panel="teacher">
+    <div class="gate-icon">🔑</div>
+    <h2>선생님 코드</h2>
+    <p class="muted">코드를 넣으면 입장퀴즈 없이 모든 스테이지가 열려요. (시연·특정 차시 수업용)</p>
+    <form id="teacher-form" class="row center" autocomplete="off">
+      <input id="teacher-code" class="cert-name" inputmode="numeric" maxlength="8" placeholder="코드 입력" style="max-width:180px;text-align:center">
+      <button class="btn primary" type="submit">열기</button>
+      <button class="btn" type="button" data-close>닫기</button>
+    </form>
+    <p id="teacher-msg" class="muted" style="min-height:1.4em;margin-top:8px"></p>
+  </div>
+  <div class="panel" data-panel="howto">
+    <h2>❓ 놀이 방법</h2>
+    <ol class="howto">
+      <li><b>목표</b>: 레이저(빛)를 💎 크리스탈에 닿게 하면 클리어! 크리스탈은 빛을 통과시켜요.</li>
+      <li>🎒 부품 상자의 <b>거울·렌즈·바위</b>를 보드로 끌어다 놓아요.</li>
+      <li>부품을 클릭하면 노란 손잡이가 나타나요. 손잡이를 끌거나 <b>⟲ ⟳</b> 버튼(Q/E)으로 돌려요.</li>
+      <li>노란 손잡이가 있는 <b>🔦 광원</b>은 각도를 바꿀 수 있어요 (←/→ 1°).</li>
+      <li>🦇 잠든 박쥐에 빛이 닿으면 안 돼요! 🪨 바위는 그림자를 만들어요.</li>
+      <li>🔬 <b>돋보기 모드</b>를 켜면 입사각·반사각·굴절각이 표시돼요 (심화).</li>
+      <li>부품을 적게 쓸수록 ⭐이 많아요. 클리어하면 📖 개념 카드를 얻어요.</li>
+    </ol>
+    <div class="row center"><button class="btn primary" data-close>알겠어요!</button></div>
+  </div>
+</div>
+
+<script src="js/engine.js"></script>
+<script src="js/levels.js"></script>
+<script src="js/render.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/game.js"></script>
+</body>
+</html>

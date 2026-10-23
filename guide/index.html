@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>빛의 미로 제작 가이드 — 선생님도 만들 수 있어요</title>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Jua&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#07091a; --panel:#121839; --panel2:#0e1330; --ink:#f4f5ff; --muted:#a4abd3; --lime:#d8ff5a; --gold:#ffd36b; --pink:#ff7bd5; --cyan:#7fd1ff; --line:rgba(255,255,255,.12); }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family:'Noto Sans KR',system-ui,sans-serif; line-height:1.7; }
+  a { color:var(--cyan); }
+  .wrap { width:min(1080px, 92vw); margin:0 auto; }
+  header.top { background: radial-gradient(900px 400px at 10% 0%, rgba(216,255,90,.14), transparent 60%), radial-gradient(800px 400px at 90% 10%, rgba(255,123,213,.16), transparent 60%), linear-gradient(180deg,#0c1031,var(--bg)); padding:56px 0 34px; border-bottom:1px solid var(--line); }
+  .kicker { color:var(--lime); font-weight:900; letter-spacing:3px; font-size:12px; }
+  h1 { font-family:'Black Han Sans','Jua',sans-serif; font-weight:400; font-size:clamp(36px,6vw,64px); line-height:1.08; margin:10px 0 12px; }
+  h1 span { color:var(--lime); }
+  .lead { font-size:17px; color:#dfe3ff; max-width:760px; margin:0; }
+  nav.toc { display:flex; gap:8px; flex-wrap:wrap; margin-top:22px; }
+  nav.toc a { text-decoration:none; color:#fff; background:rgba(255,255,255,.08); border:1px solid var(--line); padding:8px 14px; border-radius:999px; font-weight:700; font-size:14px; }
+  nav.toc a:hover { background:var(--lime); color:#0b1020; }
+  section { padding:46px 0; border-bottom:1px solid var(--line); }
+  h2 { font-family:'Black Han Sans','Jua',sans-serif; font-weight:400; font-size:clamp(26px,3.6vw,38px); margin:0 0 6px; }
+  h2 small { display:block; font-family:'Noto Sans KR'; font-size:12px; letter-spacing:3px; color:var(--lime); font-weight:900; }
+  h3 { font-size:19px; margin:24px 0 8px; color:var(--gold); }
+  p { margin:8px 0; }
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  @media (max-width:800px) { .grid2, .grid3 { grid-template-columns:1fr; } }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:16px 18px; }
+  .card h4 { margin:0 0 6px; font-size:16px; }
+  .card p, .card li { font-size:14px; color:#d3d8f5; }
+  .tag { display:inline-block; font-size:11px; font-weight:900; padding:2px 8px; border-radius:999px; background:rgba(216,255,90,.15); color:var(--lime); margin-right:6px; }
+  table { width:100%; border-collapse:collapse; font-size:14px; margin:12px 0; }
+  th, td { border:1px solid var(--line); padding:9px 10px; text-align:left; vertical-align:top; }
+  th { background:rgba(255,255,255,.06); color:var(--gold); }
+  td b { color:var(--lime); font-weight:700; }
+  .prompt { position:relative; background:#0b0f26; border:1px solid rgba(127,209,255,.35); border-radius:14px; padding:14px 16px 14px; margin:10px 0 16px; white-space:pre-wrap; font-size:14px; line-height:1.75; color:#e8ecff; font-family:'Noto Sans KR',sans-serif; }
+  .prompt .label { display:block; font-size:12px; color:var(--cyan); font-weight:900; margin-bottom:6px; letter-spacing:1px; }
+  .copy { position:absolute; top:10px; right:10px; background:var(--lime); color:#0b1020; border:none; border-radius:8px; padding:5px 10px; font-weight:800; font-size:12px; cursor:pointer; font-family:inherit; }
+  code, pre.code { font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
+  pre.code { background:#050713; border:1px solid var(--line); border-radius:12px; padding:14px; overflow:auto; font-size:13px; line-height:1.6; color:#c8f7c5; }
+  figure { margin:10px 0; } figure img { width:100%; border-radius:12px; border:1px solid var(--line); display:block; } figcaption { font-size:12px; color:var(--muted); margin-top:6px; }
+  .steps { counter-reset:s; list-style:none; padding:0; margin:12px 0; }
+  .steps li { counter-increment:s; position:relative; padding:12px 14px 12px 56px; background:var(--panel); border:1px solid var(--line); border-radius:14px; margin-bottom:10px; }
+  .steps li::before { content:counter(s); position:absolute; left:14px; top:12px; width:30px; height:30px; border-radius:50%; background:var(--lime); color:#0b1020; font-weight:900; display:grid; place-items:center; }
+  .steps li b { color:#fff; }
+  .note { background:rgba(255,211,107,.1); border-left:4px solid var(--gold); padding:10px 14px; border-radius:8px; font-size:14px; margin:12px 0; }
+  .tree { background:#050713; border:1px solid var(--line); border-radius:12px; padding:14px 16px; font-family:ui-monospace,Menlo,Consolas,monospace; font-size:13px; line-height:1.7; white-space:pre; overflow:auto; color:#dfe3ff; }
+  .flow { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin:12px 0; }
+  .flow span { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:8px 12px; font-weight:700; font-size:14px; }
+  .flow i { color:var(--lime); font-style:normal; font-weight:900; }
+  footer { padding:34px 0 60px; color:var(--muted); font-size:13px; text-align:center; }
+  .back { position:fixed; right:16px; bottom:16px; background:var(--lime); color:#0b1020; text-decoration:none; font-weight:900; padding:10px 14px; border-radius:999px; box-shadow:0 8px 24px rgba(0,0,0,.4); }
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <div class="kicker">MAKING GUIDE · 바이브코딩 따라 만들기</div>
+  <h1>빛의 미로, <span>이렇게 만들었어요</span></h1>
+  <p class="lead">수업 앱의 원칙을 정하고 → 지도서와 성취기준으로 설계하고 → AI와 대화하며 코딩하고 → ChatGPT로 그림을 만들고 → GitHub에 올리는 전 과정을, 그대로 따라 할 수 있게 정리했습니다. 프롬프트는 복사해서 바로 쓰세요.</p>
+  <nav class="toc"><a href="../../vibe-archive/index.html#behind" style="background:var(--pink);color:#0b1020">🎬 제작 과정 영상</a><a href="#s1">① 수업 앱 원칙</a><a href="#s2">② 교육과정 → 설계</a><a href="#s3">③ 바이브코딩 프롬프트</a><a href="#s4">④ 이미지 만들기</a><a href="#s5">⑤ GitHub 배포</a><a href="#s6">⑥ 수업 활용</a><a href="#s7">⑦ 체크리스트</a></nav>
+</div></header>
+
+<section id="s1"><div class="wrap">
+  <h2><small>STEP 1 · PRINCIPLES</small>수업 앱을 만들 때 챙긴 7가지</h2>
+  <p>아이들이 바로 몰입하고, 선생님이 수업에 그대로 쓸 수 있는 앱이 되도록 처음에 정한 원칙이에요. 오른쪽은 빛의 미로에 적용한 방법입니다.</p>
+  <table>
+    <tr><th style="width:24%">원칙</th><th>왜 필요할까</th><th style="width:34%">빛의 미로에서는</th></tr>
+    <tr><td><b>입장퀴즈 → 게임</b></td><td>게임 전에 핵심 개념을 짚고, ‘통과’라는 목표로 동기를 끌어올려요.</td><td>13문항 은행에서 10문항 무작위, 7개 이상 통과 시 입장 + 해설 제공</td></tr>
+    <tr><td><b>앱 = 저장소 1개</b></td><td>앱마다 인터넷 주소가 따로 생겨 링크 하나로 수업에 바로 공유해요.</td><td>light-maze 저장소 하나에 game·quiz·worksheet·guide 폴더</td></tr>
+    <tr><td><b>살아 있는 캐릭터 그림</b></td><td>캐릭터에 정이 들면 아이들이 끝까지 해 봐요.</td><td>키아트·주인공 루미·요정 반디·배경 4장·월드맵·스프라이트 12종 모두 ChatGPT</td></tr>
+    <tr><td><b>익숙한 게임 문법</b></td><td>규칙을 길게 설명하지 않아도 바로 시작할 수 있어요.</td><td>레이저 퍼즐(거울 놓기) + 월드맵 + 별 3개 + 도감 수집</td></tr>
+    <tr><td><b>교과 연결 표기</b></td><td>무엇을 배우는지 아이도 교사도 한눈에 알 수 있어요.</td><td>스테이지마다 성취기준 개념 카드, 지도서 오개념 반영</td></tr>
+    <tr><td><b>설치 없이 한 번에</b></td><td>교실 기기가 달라도 웹브라우저만 있으면 열려요.</td><td>터치 드래그·회전 버튼, 태블릿 세로 화면 대응</td></tr>
+    <tr><td><b>과정 공유</b></td><td>다른 선생님도 같은 순서로 따라 만들 수 있어요.</td><td>제작 과정 영상 + 이 가이드 + 아카이브(apps.js로 카드 자동 생성)</td></tr>
+  </table>
+</div></section>
+
+<section id="s2"><div class="wrap">
+  <h2><small>STEP 2 · CURRICULUM</small>지도서 12차시를 15개 스테이지로</h2>
+  <p>2022 개정 과학 5학년 1학기 <b>2. 빛의 성질</b>(성취기준 [6과02-01] [6과02-02] [6과02-03]) 교사용 지도서의 단원 지도 계획을 그대로 게임 흐름으로 옮겼습니다.</p>
+  <table>
+    <tr><th>차시</th><th>지도서 차시명 (핵심 활동)</th><th>성취기준</th><th>게임</th></tr>
+    <tr><td>1</td><td>단원 열기: 손전등으로 빛 도장 만들기</td><td>6과02-01</td><td>타이틀·루미 소개</td></tr>
+    <tr><td>2</td><td>물체를 보기 위해서 무엇이 필요할까요? (어둠상자)</td><td>6과02-01</td><td><b>1-1 어둠상자</b></td></tr>
+    <tr><td>3</td><td>빛이 없으면 어떤 점이 불편할까요?</td><td>6과02-01</td><td>1-1 루미 대사·개념 카드</td></tr>
+    <tr><td>4~5</td><td>빛은 어떻게 나아갈까요? (레이저 직진, 그림자)</td><td>6과02-02</td><td><b>1-2 직진, 1-3 그림자</b></td></tr>
+    <tr><td>6</td><td>빛이 거울에 부딪치면? (반사, <u>디지털 모의실험</u>)</td><td>6과02-02</td><td><b>World 2 거울의 숲</b> + 🧪 가상 실험실</td></tr>
+    <tr><td>7</td><td>공기와 물의 경계에서 빛은? (굴절)</td><td>6과02-02</td><td><b>3-1 ~ 3-3 굴절의 호수</b></td></tr>
+    <tr><td>8</td><td>공기와 렌즈의 경계에서 빛은? (볼록·오목, <u>디지털 모의실험</u>)</td><td>6과02-02</td><td><b>3-4, World 4 렌즈의 탑</b></td></tr>
+    <tr><td>9</td><td>우리 주변의 거울과 렌즈 (쓰임새 조사)</td><td>6과02-03</td><td>개념 카드(돋보기·안경·잠망경)</td></tr>
+    <tr><td>10~11</td><td>창의가 활짝: 거울이나 렌즈를 이용한 장치 만들기</td><td>6과02-03</td><td><b>2-4 잠망경</b> + 학습지 장치 설계</td></tr>
+    <tr><td>12</td><td>단원 마무리</td><td>전체</td><td><b>5-1 빛의 미로 탈출</b> + 수료증 + 입장퀴즈</td></tr>
+  </table>
+  <div class="grid2">
+    <div class="card"><h4>🧠 지도서의 오개념을 게임으로</h4><p>지도서 참고 자료의 오개념 “내 눈에서 빛이 나아가 물체가 보인다”를 1-1에서 정면으로 다룹니다. 손전등을 다른 곳으로 돌리면 보물상자가 사라지고, 빛이 닿아야만 보입니다.</p></div>
+    <div class="card"><h4>📏 지도상의 유의점 반영</h4><p>지도서에 “굴절 법칙은 다루지 않는다”고 되어 있어 기본 화면에는 숫자 없이 현상만 보이게 했습니다. 각도 숫자는 🔬 돋보기 모드(선택)에서만 나와 심화 학생용으로 씁니다.</p></div>
+  </div>
+  <figure><img src="img/worlds.jpg" alt="월드 배경 4장"><figcaption>월드 1 직진의 동굴 · 월드 2 거울의 숲 · 월드 3 굴절의 호수 · 월드 4 렌즈의 탑 (ChatGPT 생성)</figcaption></figure>
+</div></section>
+
+<section id="s3"><div class="wrap">
+  <h2><small>STEP 3 · VIBE CODING</small>AI에게 이렇게 말했어요</h2>
+  <p>Claude·ChatGPT·Gemini 어느 AI든 같은 순서로 쓰면 됩니다. 한 번에 다 시키지 말고 <b>기획 → 엔진 → 데이터 → 화면 → 퀴즈 → 학습지</b> 순서로 쪼개서 요청하는 것이 핵심입니다.</p>
+  <div class="flow"><span>① 기획서</span><i>→</i><span>② 광선 엔진</span><i>→</i><span>③ 스테이지 데이터 + 자동 검증</span><i>→</i><span>④ 화면·조작·소리</span><i>→</i><span>⑤ 입장퀴즈</span><i>→</i><span>⑥ 학습지</span><i>→</i><span>⑦ 다듬기</span></div>
+
+  <div class="prompt"><span class="label">① 기획서 프롬프트</span><button class="copy">복사</button>너는 초등 과학 교사이자 교육용 게임 기획자야. 2022 개정 과학 5학년 1학기 '2. 빛의 성질' 단원(성취기준 [6과02-01] 물체를 보기 위해 빛이 필요함, [6과02-02] 빛의 직진·반사·굴절, [6과02-03] 거울과 렌즈의 쓰임새)을 배우는 웹 퍼즐 게임을 기획해 줘.
+- 장르: 레이저를 거울·물·렌즈로 꺾어 크리스탈에 닿게 하는 퍼즐
+- 아래 지도서 12차시 흐름을 따라 월드 5개, 스테이지 15개로 구성
+- 스테이지마다: 학습 목표, 배치(16x10 격자 좌표), 정답 배치, 힌트, 클리어 후 보여줄 개념 카드 문구
+- 지도서 오개념 '눈에서 빛이 나가서 물체가 보인다'를 다루는 스테이지 포함
+- 굴절 법칙(숫자)은 다루지 말고 현상 중심으로
+(여기에 지도서 단원 지도 계획 표를 붙여 넣기)</div>
+
+  <div class="prompt"><span class="label">② 광선 추적 엔진</span><button class="copy">복사</button>js/engine.js 파일을 만들어 줘. 960x600 보드(60px 격자 16x10)에서 광원에서 나온 광선을 추적하는 함수야.
+- 벽·바위: 빛을 막음 / 평면거울(선분, 회전 가능): 입사각=반사각으로 반사
+- 물(굴절률 1.33)·유리(1.5) 사각형: 경계에서 스넬의 법칙으로 굴절, 안에서 나올 때도 굴절
+- 얇은 렌즈: 볼록은 빛을 초점으로 모으고 오목은 퍼뜨림
+- 크리스탈(목표)은 빛을 통과시키고 몇 번 맞았는지 셈, 박쥐(함정)에 닿으면 실패
+- 손전등 모드(부채꼴로 여러 광선), 3줄기 레이저 모드
+- trace(objects)와 evaluate(level, trace) 두 함수를 window.LightEngine으로 내보내 줘</div>
+
+  <div class="prompt"><span class="label">③ 스테이지 데이터 + 자동 검증 (중요!)</span><button class="copy">복사</button>기획서의 15개 스테이지를 js/levels.js에 데이터로 옮겨 줘(벽, 광원, 크리스탈, 물, 박쥐, 부품 상자 개수, 정답 배치). 그리고 node로 실행하는 verify_levels.js를 만들어서, 각 스테이지에 정답 배치를 넣었을 때 정말 클리어되는지, 처음 상태로는 클리어되지 않는지 자동으로 검사해 줘. 안 풀리는 스테이지는 벽 위치나 크리스탈 크기를 바꿔서 고쳐 줘.</div>
+  <div class="note">💡 AI가 만든 퍼즐은 <b>풀리지 않는 스테이지</b>가 섞여 있기 쉽습니다. “정답으로 정말 깨지는지 검사하는 코드”를 같이 만들게 하면 아이들 앞에서 당황할 일이 없습니다. 빛의 미로도 첫 검사에서 3개(1-3·2-3·5-1)가 정답으로도 안 풀렸고, 3-4 배치까지 모두 4개 스테이지를 이 검사로 고쳤습니다.</div>
+
+  <div class="prompt"><span class="label">④ 화면 · 조작 · 소리</span><button class="copy">복사</button>index.html과 css, js/game.js를 만들어 줘.
+- 타이틀: 키아트 배경(assets/keyart.jpg), 주인공 루미 이미지, '모험 시작/가상 실험실/입장 퀴즈/놀이 방법' 버튼
+- 월드맵: 월드별 카드와 스테이지 버튼(앞 스테이지를 깨야 열림, 선생님 코드로 전체 열기)
+- 게임: 왼쪽 부품 상자에서 거울·렌즈·바위를 끌어다 격자에 놓기, 클릭하면 회전 손잡이, Q/E로 15° 회전
+- 루미가 말풍선으로 스테이지 설명과 힌트를 말해 줌
+- 클리어하면 부품 수에 따라 별 1~3개, 개념 카드 획득, 전부 깨면 수료증
+- 태블릿 터치로도 되게, 효과음은 Web Audio로 직접 만들어 줘(파일 없이)</div>
+
+  <div class="prompt"><span class="label">⑤ 입장퀴즈</span><button class="copy">복사</button>quiz/index.html을 만들어 줘. 빛의 성질 단원 문항 13개(문항, 보기 4개, 정답, 해설)를 은행으로 두고 매번 10문항을 무작위로 내. 고르면 바로 정답/오답과 해설을 보여 주고, 10문항 중 7문항 이상 맞히면 '게임 입장하기' 버튼이 열리게 해 줘. 결과 화면에 틀린 문항 복습 목록도.</div>
+
+  <div class="prompt"><span class="label">⑥ 탐구 활동지</span><button class="copy">복사</button>worksheet/index.html에 A4 2쪽 인쇄용 활동지를 만들어 줘. 1쪽: 게임 전 예상, 스테이지별 탐구 기록표. 2쪽: 빈칸 개념 정리, 생활 속 직진·반사·굴절 예, 거울·렌즈 쓰임새 연결, 거울이나 렌즈를 이용한 장치 설계 칸, '내가 빛이라면' 과학 글쓰기. 인쇄 버튼 포함.</div>
+
+  <div class="prompt"><span class="label">⑦ 다듬기 요청은 이렇게</span><button class="copy">복사</button>(스크린샷 첨부) 3-3 스테이지에서 정답 각도 범위가 1도밖에 안 돼서 아이들이 맞추기 어려워. 크리스탈 위치나 크기를 바꿔서 정답 범위가 4도 이상 되게 하고, 똑바로 겨누면 빗나가게(굴절을 느끼도록) 해 줘. 바꾼 뒤 verify_levels.js로 다시 검사해 줘.</div>
+
+  <h3>📁 완성된 폴더 구조</h3>
+  <div class="tree">light-maze/
+├─ index.html          ← 게임 (타이틀·월드맵·스테이지)
+├─ css/style.css
+├─ js/
+│  ├─ engine.js        ← 광선 추적(직진·반사·굴절·렌즈)
+│  ├─ levels.js        ← 15개 스테이지 + 개념 카드 데이터
+│  ├─ render.js        ← 캔버스 그리기
+│  ├─ audio.js         ← 효과음·배경음(Web Audio)
+│  └─ game.js          ← 조작·판정·저장·수료증
+├─ assets/             ← ChatGPT로 만든 그림들 (+ sprites/)
+├─ quiz/index.html     ← 입장퀴즈
+├─ worksheet/index.html← 탐구 활동지(A4 2쪽)
+└─ guide/index.html    ← 지금 보는 가이드</div>
+</div></section>
+
+<section id="s4"><div class="wrap">
+  <h2><small>STEP 4 · IMAGES</small>ChatGPT로 '살아 있는' 그림 만들기</h2>
+  <p>모든 그림을 <b>한 대화방 안에서 이어서</b> 요청했습니다. 그래야 같은 화풍·같은 캐릭터가 유지됩니다. 첫 요청에 스타일을 자세히 적고, 다음부터는 “앞서와 같은 스타일”이라고만 하면 됩니다.</p>
+  <div class="grid2">
+    <figure><img src="img/chatgpt_prompt.jpg" alt="ChatGPT 프롬프트 입력"><figcaption>① 스타일·주인공·배경·구도·비율을 한 번에 적은 키아트 프롬프트</figcaption></figure>
+    <figure><img src="img/chatgpt_result.jpg" alt="ChatGPT 결과"><figcaption>② 약 1~2분 뒤 결과. 마음에 들 때까지 “~만 바꿔 줘”로 수정</figcaption></figure>
+  </div>
+  <div class="prompt"><span class="label">🎨 키아트(메인 포스터)</span><button class="copy">복사</button>게임 키아트(메인 포스터) 그림을 그려줘. 스타일: 픽사+일본 애니 느낌의 생생하고 귀여운 3D 애니메이션 스타일, 상품 캐릭터처럼 윤기 나고 선명한 색감, 영화 포스터 같은 극적인 구도. 주인공: 10살 한국 초등학생 탐험가 '루미'(짧은 갈색 머리, 노란 탐험가 조끼, 헤드램프, 큰 눈, 신난 표정, 손에 빛나는 레이저 손전등). 배경: 신비로운 '빛의 미로' 크리스탈 동굴. 붉은 레이저 빔이 여러 개의 평면거울에 반사되며 꺾이고, 투명한 물 웅덩이를 지나며 굴절되고, 커다란 볼록 렌즈를 통과해 한 점으로 모여 거대한 크리스탈을 환하게 밝히는 장면. 주인공 옆에는 반딧불처럼 빛나는 작은 빛의 요정 '반디'가 떠 있음. 깊은 남색·보라색 어둠 속에 네온처럼 빛나는 광선과 반짝이는 입자. 글자나 텍스트는 절대 넣지 말 것. 가로 16:9 비율.</div>
+  <div class="prompt"><span class="label">🧒 캐릭터(배경 제거용)</span><button class="copy">복사</button>같은 주인공 '루미'를 게임 UI용 캐릭터 그림으로 그려줘. 전신, 정면을 보고 서서 한 손에 빛나는 레이저 손전등을 들고 다른 손은 엄지척, 밝게 웃는 표정. 앞서 그린 생김새를 그대로 유지. 배경은 아무 무늬 없는 완전한 단색 밝은 초록색(#00FF00) 크로마키 배경, 그림자 없음, 캐릭터 전체가 잘리지 않게 여백을 두고. 글자 없음. 세로 2:3 비율.</div>
+  <div class="prompt"><span class="label">🏞️ 스테이지 배경 (월드마다 제목만 바꿔서)</span><button class="copy">복사</button>이번엔 게임 스테이지 배경 그림(캐릭터 없음, 글자 없음)을 그려줘. 제목: '굴절의 호수'. 맑고 투명한 청록빛 크리스탈 호수. 공기에서 수면으로 비스듬히 들어가는 붉은 레이저 빔이 수면 경계에서 꺾여 물속 크리스탈을 비추는 장면, 물에 반쯤 잠겨 꺾여 보이는 나무 막대. 앞서와 같은 스타일. 화면 가운데는 비교적 비어 있게(게임 보드가 올라갈 자리). 가로 16:9.</div>
+  <div class="prompt"><span class="label">💎 아이템 스프라이트 시트 (12개를 한 장에)</span><button class="copy">복사</button>게임 아이템 스프라이트 시트를 그려줘. 앞서와 같은 픽사+애니 3D 스타일. 배경은 아무 무늬 없는 완전한 단색 밝은 초록색(#00FF00). 4열 x 3행 격자로 12개를 간격을 넓게 두고 각 칸 가운데에 하나씩, 서로 겹치지 않게, 그림자 없이, 글자 없이. 1행: 빛을 못 받은 어두운 보라색 크리스탈 / 환하게 빛나는 황금빛 크리스탈 / 잠든 귀여운 박쥐 / 깜짝 놀라 눈을 크게 뜬 박쥐. 2행: 닫힌 보물상자 / 열려서 빛나는 보물상자 / 옆에서 본 레이저 발사기 / 옆에서 본 손전등. 3행: 둥근 바위 / 이끼 낀 돌기둥 / 빛나는 물고기 / 별 모양 배지. 정사각형 1:1.</div>
+  <div class="grid2">
+    <figure><img src="img/sprites_before.jpg" alt="초록 배경 스프라이트 원본"><figcaption>초록 배경으로 받은 원본</figcaption></figure>
+    <figure><img src="img/sprites_after.jpg" alt="배경 제거 후"><figcaption>초록색을 투명하게 지우고(크로마키) 한 개씩 잘라 PNG로</figcaption></figure>
+  </div>
+  <div class="note">🟩 <b>왜 초록 배경?</b> 캐릭터·아이템은 게임 화면 위에 올려야 해서 배경이 투명해야 합니다. 초록 단색으로 받으면 배경을 깔끔하게 지울 수 있어요. 지우는 방법(쉬운 순서): ① 처음부터 ChatGPT에게 “<b>배경을 투명하게(PNG)</b> 해 줘”라고 요청해 내려받기, ② 캔바 <b>편집 → 배경 제거</b> 후 PNG(투명 배경)로 다운로드, ③ 파워포인트 <b>그림 서식 → 배경 제거</b> 후 ‘그림으로 저장’, ④ AI에게 “초록색을 투명하게 바꾸는 파이썬 코드”를 받아 실행(빛의 미로는 이 방법). 테두리에 초록 기운이 남으면 “초록 번짐(despill)도 없애 줘”라고 하세요.</div>
+  <div class="card"><h4>📌 이미지 프롬프트 공식</h4><p><span class="tag">스타일</span>픽사+일본 애니 3D, 윤기 나는 상품 캐릭터 <span class="tag">대상</span>누가·무엇을 <span class="tag">장면</span>어떤 과학 현상이 보이게 <span class="tag">용도</span>“가운데는 비워 둬”, “초록 배경”, “4×3 격자” <span class="tag">금지</span>“글자 없음” <span class="tag">비율</span>16:9 / 2:3 / 1:1</p></div>
+</div></section>
+
+<section id="s5"><div class="wrap">
+  <h2><small>STEP 5 · GITHUB PAGES</small>링크 하나로 교실에 배포하기</h2>
+  <p>명령어 없이 <b>웹 화면만으로</b> 할 수 있습니다. 저장소 이름이 곧 주소가 됩니다: <code>https://아이디.github.io/저장소이름/</code></p>
+  <ol class="steps">
+    <li><b>github.com 로그인</b> — 계정이 없으면 Sign up으로 가입(학교 이메일 추천).</li>
+    <li><b>새 저장소 만들기</b> — 오른쪽 위 <b>＋</b> → <b>New repository</b> → 이름 <code>light-maze</code> → <b>Public</b> 선택 → <b>Create repository</b>.</li>
+    <li><b>파일 올리기</b> — 빈 저장소 화면의 <b>uploading an existing file</b> 링크(파일이 이미 있으면 <b>Add file → Upload files</b>) → <code>light-maze</code> 폴더 <u>안의</u> 파일과 폴더(index.html, css, js, assets, quiz, worksheet, guide)를 전부 끌어다 놓기 → 아래 <b>Commit changes</b>. 웹 업로드는 파일 하나당 25MB, 한 번에 100개까지예요.(넘으면 폴더를 나눠서 두 번 올리기)</li>
+    <li><b>Pages 켜기</b> — 저장소 위쪽 <b>Settings</b> → 왼쪽 <b>Pages</b> → Build and deployment의 Branch를 <b>main</b> / <b>(root)</b>로 고르고 <b>Save</b>.</li>
+    <li><b>1~2분 기다리기</b> — Pages 화면 맨 위에 “Your site is live at …” 주소가 뜹니다. 예: <code>https://hongdonmax.github.io/light-maze/</code></li>
+    <li><b>아카이브도 같은 방법</b> — <code>vibe-archive</code> 저장소를 만들어 아카이브 폴더 안의 파일을 올리고 Pages를 켭니다. 두 저장소가 같은 계정에 있으면 아카이브의 ‘프로그램 시작’ 버튼이 빛의 미로로 바로 연결됩니다.</li>
+    <li><b>고칠 때</b> — 바뀐 파일만 같은 자리에 다시 업로드(Add file → Upload files)하면 덮어써지고 1~2분 뒤 자동으로 반영됩니다.</li>
+  </ol>
+  <div class="note">⚠️ 저장소가 <b>Public</b>이면 누구나 코드를 볼 수 있습니다. 학생 이름·사진·개인정보가 담긴 파일, API 키가 들어 있는 파일은 올리지 마세요.</div>
+  <div class="note">📄 <b>첫 화면 파일 이름은 꼭 <code>index.html</code></b>이어야 주소만으로 열립니다. 윈도우는 확장자를 숨겨서 <code>index.html.html</code>처럼 저장되는 실수가 잦아요. 탐색기 <b>보기 → 파일 확장명</b>을 켜고 확인하세요.</div>
+  <h3>⌨️ 명령줄(git)로 올리는 방법 — 익숙해지면 더 빠릅니다</h3>
+  <pre class="code">cd light-maze
+git init
+git add .
+git commit -m "빛의 미로 첫 배포"
+git branch -M main
+git remote add origin https://github.com/아이디/light-maze.git
+git push -u origin main
+# 이후 수정할 때는
+git add . && git commit -m "3-3 스테이지 난이도 조정" && git push</pre>
+  <h3>➕ 새 앱을 아카이브에 추가하기</h3>
+  <p>아카이브의 <code>data/apps.js</code>에 카드 한 개를 추가하면 홈페이지에 자동으로 나타납니다.</p>
+  <pre class="code">{
+  "id": "my-new-app", "title": "새 앱 이름", "category": "science",   // science · math · etc · class(학급 경영) · training
+  "subject": "과학 6학년 2학기 · 전기의 이용",
+  "desc": "한두 문장 소개",
+  "url": "https://아이디.github.io/my-new-app/",
+  "quizUrl": "", "worksheetUrl": "", "img": "assets/thumb_my-new-app.jpg", "tags": ["게임"]
+},</pre>
+</div></section>
+
+<section id="s6"><div class="wrap">
+  <h2><small>STEP 6 · IN CLASS</small>수업에서 이렇게 써요</h2>
+  <div class="grid3">
+    <div class="card"><h4>🟢 도입 5분</h4><p>입장퀴즈로 지난 시간 복습. 7문제 통과한 학생부터 게임 입장 — 자연스럽게 개념 점검이 됩니다.</p></div>
+    <div class="card"><h4>🔵 전개 25분</h4><p>그 차시에 해당하는 월드만 열어서 플레이. 활동지 ‘스테이지 탐구 기록표’에 부품 배치와 발견한 성질을 적게 합니다.</p></div>
+    <div class="card"><h4>🟣 정리 10분</h4><p>얻은 개념 카드를 짝과 설명하기. 🔬 돋보기 모드로 입사각=반사각을 함께 확인(심화).</p></div>
+  </div>
+  <table>
+    <tr><th>차시</th><th>추천 스테이지</th><th>활용 포인트</th></tr>
+    <tr><td>2~3차시</td><td>1-1</td><td>실제 어둠상자 실험 후 “손전등을 끄면?”을 게임으로 다시 확인</td></tr>
+    <tr><td>4~5차시</td><td>1-2, 1-3</td><td>레이저 직진 실험 뒤 그림자 크기 조절을 게임으로</td></tr>
+    <tr><td>6차시</td><td>2-1 ~ 2-3, 가상 실험실</td><td>지도서의 ‘디지털 도구 모의실험’ 활동으로 그대로 사용</td></tr>
+    <tr><td>7~8차시</td><td>3-1 ~ 3-4, 4-1 ~ 4-3</td><td>레이저 보안경이 부족할 때 대체·보충 활동</td></tr>
+    <tr><td>10~11차시</td><td>2-4 잠망경</td><td>종이 잠망경 만들기 전에 원리 체험 → 활동지에 장치 설계</td></tr>
+    <tr><td>12차시</td><td>5-1, 수료증</td><td>단원 마무리 + 입장퀴즈를 형성평가로</td></tr>
+  </table>
+  <div class="note">🔒 <b>모험 시작</b>은 입장퀴즈(10문제 중 7문제)를 통과해야 열립니다. 🔑 선생님 코드: 타이틀의 <b>🔑 선생님</b> 버튼에 <code>2022</code>를 넣으면 입장퀴즈 없이 모든 스테이지가 열립니다(시연·특정 차시 수업용). 진행 상황은 각 기기 브라우저에 저장됩니다.</div>
+</div></section>
+
+<section id="s7"><div class="wrap">
+  <h2><small>STEP 7 · CHECKLIST</small>배포 전 체크리스트</h2>
+  <div class="grid2">
+    <div class="card"><h4>✅ 수업 전</h4><ul><li>학생 기기(태블릿·크롬북)에서 직접 열어 보기</li><li>소리 크기 확인(🔊 버튼으로 끄기 가능)</li><li>입장퀴즈 문항이 우리 반 수업 순서와 맞는지</li><li>활동지 인쇄(A4 2쪽)</li></ul></div>
+    <div class="card"><h4>🛠️ 자주 묻는 질문</h4><ul><li><b>화면이 안 바뀌어요</b> → 새로고침(Ctrl+F5). Pages 반영은 1~2분 걸려요.</li><li><b>그림이 안 나와요</b> → 파일 이름 대소문자, 폴더 위치 확인</li><li><b>학생 진행이 사라졌어요</b> → 기기·브라우저가 바뀌면 처음부터. 선생님 코드로 열어 주세요.</li></ul></div>
+  </div>
+</div></section>
+
+<footer>빛의 미로 — 레이저 탐험대 · 부산 명진초등학교 최일훈 · 2026<br>그림: ChatGPT 이미지 생성 · 코드: AI 바이브코딩 · 교육과정: 2022 개정 과학 5-1-2 빛의 성질</footer>
+<a class="back" href="../index.html">💎 게임으로</a>
+<script>
+document.querySelectorAll('.copy').forEach(btn => btn.addEventListener('click', async () => {
+  const box = btn.parentElement; const label = box.querySelector('.label');
+  const text = box.innerText.replace(btn.innerText, '').replace(label ? label.innerText : '', '').trim();
+  try { await navigator.clipboard.writeText(text); btn.textContent = '복사됨!'; }
+  catch (e) { const r = document.createRange(); r.selectNodeContents(box); const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = 'Ctrl+C'; }
+  setTimeout(() => btn.textContent = '복사', 1600);
+}));
+</script>
+</body>
+</html>

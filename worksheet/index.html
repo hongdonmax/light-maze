@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>빛의 미로 탐구 활동지 — 5-1-2 빛의 성질</title>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#1b1f3a; --accent:#d98b00; --line:#c9cde6; --soft:#f3f5ff; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:#555; font-family:'Noto Sans KR',sans-serif; color:var(--ink); }
+  .toolbar { position:sticky; top:0; background:#1b1f3a; color:#fff; padding:10px 16px; display:flex; gap:10px; align-items:center; z-index:9; }
+  .toolbar button { background:#ffd36b; border:none; border-radius:10px; padding:8px 16px; font-weight:800; cursor:pointer; font-family:inherit; }
+  .toolbar a { color:#ffd36b; font-weight:700; }
+  .page { width:210mm; min-height:297mm; margin:14px auto; background:#fff; padding:14mm 14mm 12mm; box-shadow:0 10px 40px rgba(0,0,0,.4); page-break-after:always; }
+  h1 { font-family:'Jua',sans-serif; font-size:26px; margin:0; }
+  .head { display:flex; justify-content:space-between; align-items:flex-end; border-bottom:3px solid var(--ink); padding-bottom:8px; margin-bottom:12px; }
+  .meta { font-size:12px; color:#555; }
+  .name { font-size:13px; display:flex; gap:14px; }
+  .name span { border-bottom:1px solid #333; min-width:90px; display:inline-block; }
+  h2 { font-size:16px; background:var(--ink); color:#fff; display:inline-block; padding:4px 12px; border-radius:8px; margin:14px 0 8px; }
+  .box { border:1.5px solid var(--line); border-radius:10px; padding:10px 12px; margin:6px 0; }
+  .lines { background:repeating-linear-gradient(180deg, transparent 0 25px, var(--line) 25px 26px); height:80px; }
+  .lines.tall { height:120px; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th, td { border:1px solid var(--line); padding:7px 8px; vertical-align:top; }
+  th { background:var(--soft); font-weight:800; }
+  td.w { height:48px; }
+  .blank { display:inline-block; min-width:70px; border-bottom:1.5px solid #333; }
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .sketch { height:150px; border:1.5px dashed var(--line); border-radius:10px; background:linear-gradient(var(--line) 1px, transparent 1px) 0 0/ 20px 20px, linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0/ 20px 20px; }
+  .tip { font-size:12px; color:#555; }
+  .std { font-size:11px; color:#4a5a9a; font-weight:700; }
+  ul { margin:4px 0; padding-left:18px; font-size:13px; line-height:1.7; }
+  .check { font-size:13px; } .check label { display:block; margin:3px 0; }
+  @media print { body { background:#fff; } .toolbar { display:none; } .page { margin:0; box-shadow:none; width:auto; min-height:auto; } }
+</style>
+</head>
+<body>
+<div class="toolbar"><button onclick="window.print()">🖨️ 인쇄 / PDF 저장</button><span>A4 2쪽 · 게임 전·중·후 탐구 활동지</span><a href="../index.html" style="margin-left:auto">← 빛의 미로로 돌아가기</a></div>
+
+<div class="page">
+  <div class="head">
+    <div><div class="std">2022 개정 과학 5학년 1학기 · 2단원 빛의 성질 · [6과02-01] [6과02-02] [6과02-03]</div><h1>💎 빛의 미로 — 레이저 탐험대 탐구 활동지</h1><div class="meta">빛의 직진·반사·굴절, 거울과 렌즈 · 디지털 모의실험 기록</div></div>
+    <div class="name">5학년 <span></span>반 <span></span>번 이름 <span></span></div>
+  </div>
+
+  <h2>① 게임 전 — 내 생각 예상하기</h2>
+  <table>
+    <tr><th style="width:36%">빛이 …을 만나면 어떻게 될까?</th><th>내 예상 (그림이나 글로)</th></tr>
+    <tr><td>🪞 평면거울에 비스듬히 부딪치면</td><td class="w"></td></tr>
+    <tr><td>💧 공기에서 물로 비스듬히 들어가면</td><td class="w"></td></tr>
+    <tr><td>🔍 볼록 렌즈를 통과하면 / 👓 오목 렌즈를 통과하면</td><td class="w"></td></tr>
+  </table>
+
+  <h2>② 게임 중 — 스테이지 탐구 기록</h2>
+  <table>
+    <tr><th style="width:22%">스테이지</th><th style="width:40%">내가 한 일 (부품·각도)</th><th>발견한 빛의 성질</th></tr>
+    <tr><td><b>1-1 어둠상자</b><br><span class="tip">손전등을 끄면?</span></td><td class="w"></td><td></td></tr>
+    <tr><td><b>1-3 그림자 놀이</b><br><span class="tip">바위를 손전등에 가까이 두면 그림자는?</span></td><td class="w"></td><td></td></tr>
+    <tr><td><b>2-1 첫 번째 거울</b><br><span class="tip">거울 각도 <span class="blank" style="min-width:40px"></span>°</span></td><td class="w"></td><td></td></tr>
+    <tr><td><b>2-4 잠망경</b><br><span class="tip">두 거울은 서로 어떤 관계?</span></td><td class="w"></td><td></td></tr>
+    <tr><td><b>3-1 물속으로</b><br><span class="tip">크리스탈을 똑바로 겨눴을 때 결과는?</span></td><td class="w"></td><td></td></tr>
+    <tr><td><b>3-2 수직으로</b><br><span class="tip">수직으로 들어간 빛은?</span></td><td class="w"></td><td></td></tr>
+    <tr><td><b>4-1 / 4-2 렌즈</b><br><span class="tip">어떤 렌즈를 골랐나요? 왜?</span></td><td class="w"></td><td></td></tr>
+  </table>
+  <p class="tip">🔬 <b>(심화)</b> 돋보기 모드를 켜서 입사각과 반사각을 비교해 보세요. 입사각 ( &nbsp;&nbsp;&nbsp; )° 반사각 ( &nbsp;&nbsp;&nbsp; )° → 두 각은 (같다 / 다르다)</p>
+</div>
+
+<div class="page">
+  <div class="head"><div><div class="std">빛의 미로 탐구 활동지 (2/2)</div><h1>③ 게임 후 — 개념 정리하기</h1></div><div class="name">이름 <span></span></div></div>
+
+  <div class="box">
+    <b>1. 빈칸에 알맞은 말을 써 봅시다.</b>
+    <ul>
+      <li>빛이 곧게 나아가는 성질을 빛의 <span class="blank"></span>(이)라고 합니다.</li>
+      <li>빛이 물체에 부딪쳐 나아가는 방향이 바뀌는 성질을 빛의 <span class="blank"></span>(이)라고 합니다.</li>
+      <li>빛이 공기와 물의 경계에서 나아가는 방향이 꺾이는 성질을 빛의 <span class="blank"></span>(이)라고 합니다.</li>
+      <li>가운데가 두꺼운 <span class="blank"></span> 렌즈는 빛을 모으고, 가운데가 얇은 <span class="blank"></span> 렌즈는 빛을 퍼뜨립니다.</li>
+    </ul>
+  </div>
+
+  <div class="box">
+    <b>2. 일상생활에서 빛의 직진·반사·굴절이 일어나는 예를 각각 두 가지씩 써 봅시다.</b>
+    <table style="margin-top:6px"><tr><th style="width:20%">빛의 직진</th><td class="w"></td></tr><tr><th>빛의 반사</th><td class="w"></td></tr><tr><th>빛의 굴절</th><td class="w"></td></tr></table>
+  </div>
+
+  <div class="grid2">
+    <div class="box">
+      <b>3. 거울과 렌즈의 쓰임새 — 줄로 연결해 봅시다.</b>
+      <ul>
+        <li>양치할 때 얼굴을 비추어 봄 &nbsp;·&nbsp;&nbsp;&nbsp;&nbsp; · 볼록 렌즈</li>
+        <li>작은 글씨를 크게 봄 &nbsp;·&nbsp;&nbsp;&nbsp;&nbsp; · 오목 렌즈</li>
+        <li>더 넓은 범위를 봄 &nbsp;·&nbsp;&nbsp;&nbsp;&nbsp; · 거울</li>
+      </ul>
+      <div class="check"><b>내가 클리어한 월드</b>
+        <label>☐ 직진의 동굴 &nbsp; ☐ 거울의 숲 &nbsp; ☐ 굴절의 호수</label><label>☐ 렌즈의 탑 &nbsp; ☐ 빛의 미로 탈출 &nbsp; ⭐ 모은 별: <span class="blank" style="min-width:40px"></span>개</label></div>
+    </div>
+    <div class="box">
+      <b>4. 창의가 활짝! 거울이나 렌즈를 이용한 나만의 장치 설계</b>
+      <div class="tip">(예: 잠망경, 만화경, 간이 사진기, 간이 프로젝터, 또는 새로운 장치)</div>
+      <div class="sketch" style="margin-top:6px"></div>
+      <div class="tip" style="margin-top:6px">이용한 빛의 성질: ☐ 직진 ☐ 반사 ☐ 굴절 &nbsp; 장치 이름: <span class="blank"></span></div>
+    </div>
+  </div>
+
+  <div class="box">
+    <b>5. 과학 글쓰기 — "내가 빛이라면" 빛의 성질을 넣어 자기소개를 써 봅시다.</b>
+    <div class="lines tall"></div>
+  </div>
+  <p class="tip">평가 기준: 직진·반사·굴절을 모두 포함하여 설명했는가 / 거울과 렌즈의 쓰임새를 빛의 성질과 관련지어 말할 수 있는가</p>
+</div>
+</body>
+</html>
