@@ -6,7 +6,7 @@
 거울로 꺾고, 물로 휘고, 렌즈로 모아라! 레이저(빛)를 크리스탈에 닿게 하며 빛의 **직진·반사·굴절**과 **거울·렌즈의 쓰임새**를 익히는 웹 게임입니다. 설치 없이 브라우저에서 바로 실행됩니다(PC·태블릿).
 
 ## 바로가기 (GitHub Pages 배포 후)
-- 🎮 게임: https://hongdonmax.github.io/light-maze/
+- 🎮 게임: https://hongdonedu.github.io/light-maze/
 - 📝 입장퀴즈: `…/light-maze/quiz/` — 10문제 중 7문제 이상 맞히면 모험 시작
 - 📄 탐구 활동지(A4 2쪽): `…/light-maze/worksheet/`
 - 📘 제작 가이드(프롬프트·그림·배포 방법): `…/light-maze/guide/`
